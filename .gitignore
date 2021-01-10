@@ -1,4 +1,2 @@
-db
+db/db_access.js
 node_modules
-package-lock.json
-package.json

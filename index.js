@@ -1,19 +1,6 @@
-import mysql from 'mysql';
-import user from './db/db_access.js';
+import db_connect from './db/db_connect.js';
+import store from './store_query.js';
 
-var connection = mysql.createConnection({
-    host     : user.host,
-    user     : user.user,
-    password : user.password,
-    port     : user.port
-});
-  
-connection.connect(function(err) {
-    if (err) {
-        console.error('Database connection failed: ' + err.stack);
-        return;
-    }
-    console.log('Connected to database.');
-});
-
-connection.end();
+var main_connectdb = db_connect.connectdb();
+var main_accessstorelist = store.access_storelist();
+var main_enddb = db_connect.enddb();
