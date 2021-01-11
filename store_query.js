@@ -1,4 +1,5 @@
 import { query } from 'express';
+import { connection } from './db/db_connect.js';
 
 function querydb(ColumnData)
 {
@@ -9,7 +10,7 @@ function querydb(ColumnData)
       });
 }
 
-export default function access_storelist()
+export function access_storelist()
 {
     var store = 'SELECT name FROM store';
     querydb(store);

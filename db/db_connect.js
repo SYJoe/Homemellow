@@ -1,23 +1,24 @@
 import mysql from 'mysql';
-import user from './db_access.js';
+import { user_data } from './db_access.js';
 
-export default function connectdb()
+export var connection = mysql.createConnection({
+    host     : user_data.host,
+    user     : user_data.user,
+    password : user_data.password,
+    port     : user_data.port,
+    database : user_data.database
+});
+
+export function connectdb()
 {
-    var connection = mysql.createConnection({
-        host     : user.host,
-        user     : user.user,
-        password : user.password,
-        port     : user.port,
-        database : user.database
-    });
-      
     connection.connect(function(err) {
         if (err) {
-            return 'Database connection failed: ' + err.stack;
+            console.log('Database connection failed: ' + err.stack);
         }
-        return 'Connected to database.';
+        console.log('Connected to database.');
     });
 }
+
 export function enddb()
 {   
     connection.end();
