@@ -22,4 +22,5 @@ export function connectdb()
 export function enddb()
 {   
     connection.end();
+    console.log('Disconnected.');
 }

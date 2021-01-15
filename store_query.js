@@ -3,11 +3,13 @@ import { connection } from './db/db_connect.js';
 
 function querydb(ColumnData)
 {
-    connection.query(ColumnData, function (err, rows, fields) {
-        if (err) console.log(err);
-        console.log('rows', rows);
-        //console.log('fields', fields);
-      });
+    connection.query(ColumnData, function (err, data) {
+        if(err)
+        {
+            console.log(err);
+        }
+        console.log('outputData', data);
+    });
 }
 
 export function access_storelist()
