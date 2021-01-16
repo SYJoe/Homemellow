@@ -1,26 +1,20 @@
 import mysql from 'mysql';
-import { user_data } from './db_access.js';
+import express from 'express';
+import bodyParser from 'body-parser';
 
-export var connection = mysql.createConnection({
-    host     : user_data.host,
-    user     : user_data.user,
-    password : user_data.password,
-    port     : user_data.port,
-    database : user_data.database
-});
+export var app = express();
 
-export function connectdb()
+export function connectdb() 
 {
-    connection.connect(function(err) {
-        if (err) {
-            console.log('Database connection failed: ' + err.stack);
-        }
-        console.log('Connected to database.');
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
+
+    app.listen(3000, 'localhost', function () {
+        console.log('서버 실행 중...');
     });
 }
 
-export function enddb()
-{   
-    connection.end();
+export function enddb() {
+    user_data.end();
     console.log('Disconnected.');
 }

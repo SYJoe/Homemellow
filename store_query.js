@@ -1,9 +1,9 @@
 import { query } from 'express';
-import { connection } from './db/db_connect.js';
+import { access } from './db/db_access.js';
 
 function querydb(ColumnData)
 {
-    connection.query(ColumnData, function (err, data) {
+    access.query(ColumnData, function (err, data) {
         if(err)
         {
             console.log(err);

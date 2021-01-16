@@ -1,4 +1,4 @@
-import { connection } from './db/db_connect.js';
+import { access } from './db/db_access.js';
 
 export function user_login(id, passwd) {
     var userId = id;
@@ -6,7 +6,7 @@ export function user_login(id, passwd) {
 
     var sql = 'SELECT * FROM users where id = ?';
 
-    connection.query(sql, userId, function (err, data) {
+    access.query(sql, userId, function (err, data) {
         var message = '에러가 발생했습니다';
 
         if (err) 
