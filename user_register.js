@@ -1,7 +1,8 @@
-import { app } from './db/db_connect.js';
-import { access } from './db/db_access.js'
+import { app } from './express.js';
+import { access } from './db/db_connect.js'
 
 export function user_register() {
+    console.log("register");
     app.post('/users', function (req, res) {
         console.log(req.body);
         var userEmail = req.body.email;
@@ -24,6 +25,9 @@ export function user_register() {
             }
 
             console.log(message);
+            res.json({
+                'message': message
+            });
         });
     });
 }

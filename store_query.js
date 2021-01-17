@@ -1,22 +1,34 @@
-import { query } from 'express';
-import { access } from './db/db_access.js';
+import { access } from './db/db_connect.js';
+import { app } from './express.js';
 
-function querydb(ColumnData)
-{
-    access.query(ColumnData, function (err, data) {
-        if(err)
-        {
-            console.log(err);
-        }
-        console.log('outputData', data);
+export function access_storelist() {
+    app.post('/store', function (req, res) {
+        console.log(req.body);
+        var name = req.body.name;
+        var cost = req.body.cost;
+        var stock = req.body.stock;
+        var web_link = req.body.web_link;
+        var img = req.body.img;
+
+        var sql_img = 'select * from store';
+
+        connection.query(sql, function (err, result) {
+            var message = '에러가 발생했습니다';
+
+            if (err) 
+            {
+                console.log(err);
+            } 
+            else 
+            {
+                res.json({
+                    'name' : name,
+                    'cost' : cost,
+                    'stock' : stock,
+                    'web_link' : web_link,
+                    'image' : img
+                });
+            }
+        })
     });
-}
-
-export function access_storelist()
-{
-    var store = 'SELECT name FROM store';
-    querydb(store);
-
-    store = 'SELECT img FROM store';
-    querydb(store); 
 }
