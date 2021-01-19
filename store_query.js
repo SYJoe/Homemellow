@@ -10,7 +10,7 @@ export function access_storelist() {
         var web_link = req.body.web_link;
         var img = req.body.img;
 
-        var sql_img = 'select * from store';
+        var sql = 'select * from store';
 
         connection.query(sql, function (err, result) {
             var message = '에러가 발생했습니다';
