@@ -1,0 +1,3 @@
+[submodule "LoginExample"]
+	path = LoginExample
+	url = https://github.com/zion830/LoginExample.git
