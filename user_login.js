@@ -2,14 +2,15 @@ import { access } from './db/db_connect.js';
 import { app } from './express.js';
 
 export function user_login() {
+    console.log("login");
     app.post('/users', function (req, res) {
         console.log(req.body);
-        var userId = req.body.id;
+        var userEmail = req.body.email;
         var userPasswd = req.body.passwd;
 
         var sql = 'select * from users where email = ?';
 
-        connection.query(sql, userId, function (err, result) {
+        connection.query(sql, userEmail, function (err, result) {
             var message = '에러가 발생했습니다';
 
             if (err) {

@@ -1,3 +1,4 @@
 db/db_connect.js
 node_modules
 .DS_Store
+LoginExample/app/build

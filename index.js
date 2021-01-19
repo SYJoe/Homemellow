@@ -6,7 +6,9 @@ import { user_login } from './user_login.js';
 //const account = 0; //0 : Account does not exist, 1 : Account exist
 
 connect();
-user_register();
-user_login();
-access_storelist();
+setTimeout(function () {
+    user_register();
+    user_login();
+}, 3000);
+
 //enddb();
