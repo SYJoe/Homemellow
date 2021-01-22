@@ -2,10 +2,10 @@
   "name": "homemellow",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "test.js",
   "type": "module",
   "scripts": {
-    "start": "node index"
+    "start": "node test"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
