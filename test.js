@@ -27,7 +27,7 @@ var access = mysql.createConnection({
         var params = [userEmail, userId, userPasswd, userName, userHPNum];
 
         access.query(sql, params, function (err) {
-            var message = '에러가 발생했습니다';
+            var message = '에러가 발생했습니다.';
 
             if (err) {
                 console.log(err);
