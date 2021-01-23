@@ -70,3 +70,22 @@ app.post('/users/login', function (req, res) {
         });
     })
 });
+
+app.post('/store/index', function (req, res) {
+
+    var sql = "SELECT * FROM store";
+
+    access.query(sql, function (err, result) {
+        var message = '에러가 발생했습니다';
+
+        if (err) {
+            console.log(err);
+        } else {
+            
+        }
+
+        res.json({
+            //'message': message
+        });
+    })
+});
