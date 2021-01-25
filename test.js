@@ -1,18 +1,22 @@
-
-import mysql from 'mysql';
-import express from 'express';
-import bodyParser from 'body-parser';
+const mysql = require('mysql');
+const express = require('express');
+const bodyParser = require('body-parser')
 
 var app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.listen(3000, '0.0.0.0', function () {
+app.listen(80, function () {
     console.log('서버 실행 중...');
 });
 console.log("test");
 var access = mysql.createConnection({
+    host: "",
+    user: "",
+    database: "",
+    password: "",
+    port: 
 });
 
     app.post('/users/register', function (req, res) {
@@ -81,11 +85,12 @@ app.post('/store/index', function (req, res) {
         if (err) {
             console.log(err);
         } else {
+            message = result;
             
         }
 
         res.json({
-            //'message': message
+            'message': message
         });
     })
 });
