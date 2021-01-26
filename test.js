@@ -1,11 +1,11 @@
 const mysql = require('mysql');
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
 var app = express();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.listen(80, function () {
     console.log('서버 실행 중...');
@@ -19,33 +19,33 @@ var access = mysql.createConnection({
     port: 
 });
 
-    app.post('/users/register', function (req, res) {
-        console.log(req.body);
-        var userEmail = req.body.email;
-        var userId = req.body.id;
-        var userPasswd = req.body.passwd;
-        var userName = req.body.name;
-        var userHPNum = req.body.hp_num;
+app.post('/users/register', function (req, res) {
+    console.log(req.body);
+    var userEmail = req.body.email;
+    var userId = req.body.id;
+    var userPasswd = req.body.passwd;
+    var userName = req.body.name;
+    var userHPNum = req.body.hp_num;
 
-        var sql = 'INSERT INTO users (email, id, passwd, name, hp_num) VALUES (?, ?, ?, ?, ?)';
-        var params = [userEmail, userId, userPasswd, userName, userHPNum];
+    var sql = 'INSERT INTO users (email, id, passwd, name, hp_num) VALUES (?, ?, ?, ?, ?)';
+    var params = [userEmail, userId, userPasswd, userName, userHPNum];
 
-        access.query(sql, params, function (err) {
-            var message = '에러가 발생했습니다.';
+    access.query(sql, params, function (err) {
+        var message = '에러가 발생했습니다.';
 
-            if (err) {
-                console.log(err);
-            }
-            else {
-                message = '회원가입에 성공했습니다.';
-            }
+        if (err) {
+            console.log(err);
+        }
+        else {
+            message = '회원가입에 성공했습니다.';
+        }
 
-            console.log(message);
-            res.json({
-                'message': message
-            });
+        console.log(message);
+        res.json({
+            'message': message
         });
     });
+});
 
 app.post('/users/login', function (req, res) {
     console.log(req.body);
@@ -75,7 +75,7 @@ app.post('/users/login', function (req, res) {
     })
 });
 
-app.post('/store/index', function (req, res) {
+app.get('/store/index', function (req, res) {
 
     var sql = "SELECT * FROM store";
 
@@ -85,12 +85,12 @@ app.post('/store/index', function (req, res) {
         if (err) {
             console.log(err);
         } else {
-            message = result;
-            
+            message = "store data";
         }
 
         res.json({
-            'message': message
+            'message': message,
+            'storedata' : result
         });
     })
 });
