@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.listen(80, function () {
     console.log('서버 실행 중...');
 });
-console.log("test");
+
 var access = mysql.createConnection({
     host: "",
     user: "",
@@ -56,28 +56,44 @@ app.post('/users/login', function (req, res) {
 
     access.query(sql, userEmail, function (err, result) {
         var message = '에러가 발생했습니다';
+        var code = 404;
 
         if (err) {
             console.log(err);
         } else {
             if (result.length === 0) {
                 message = '존재하지 않는 계정입니다!';
+                code = 204;
             } else if (userPasswd !== result[0].passwd) {
                 message = '비밀번호가 틀렸습니다!';
+                code = 204;
             } else {
                 message = '로그인 성공! ' + result[0].name + '님 환영합니다!';
+                code = 200;
             }
         }
-
+        console.log(code);
         res.json({
-            'message': message
+            'message': message,
+            'code': code
         });
     })
 });
 
-app.get('/store/index', function (req, res) {
-
+app.get('/store/index', function (res) {
+    console.log("store");
     var sql = "SELECT * FROM store";
+
+    var count;
+    var name = [];
+    var cost = [];
+
+    access.query("SELECT COUNT(*) as count FROM store", function (err, result) {
+        if (err) {
+            console.log(err);
+        }
+        count = result[0].count;
+    });
 
     access.query(sql, function (err, result) {
         var message = '에러가 발생했습니다';
@@ -86,11 +102,18 @@ app.get('/store/index', function (req, res) {
             console.log(err);
         } else {
             message = "store data";
+            console.log(message);
+        }
+
+        for (var i = 0; i < count; i++) {
+            name[i] = result[i].name;
+            cost[i] = result[i].cost;
         }
 
         res.json({
             'message': message,
-            'storedata' : result
+            'name': name,
+            'cost': cost
         });
     })
 });
