@@ -73,6 +73,7 @@ app.post('/users/login', function (req, res) {
             }
         }
         console.log(code);
+
         res.json({
             'message': message,
             'code': code
@@ -80,7 +81,7 @@ app.post('/users/login', function (req, res) {
     })
 });
 
-app.get('/store/index', function (res) {
+app.get('/store/index', function (req, res) {
     console.log("store");
     var sql = "SELECT * FROM store";
 
@@ -101,6 +102,7 @@ app.get('/store/index', function (res) {
         if (err) {
             console.log(err);
         } else {
+            
             message = "store data";
             console.log(message);
         }
