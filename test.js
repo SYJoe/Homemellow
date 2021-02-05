@@ -12,10 +12,10 @@ app.listen(80, function () {
 });
 
 var access = mysql.createConnection({
-    host: "",
-    user: "",
-    database: "",
-    password: "",
+    host:
+    user: 
+    database: 
+    password: 
     port: 
 });
 
@@ -83,11 +83,13 @@ app.post('/users/login', function (req, res) {
 
 app.get('/store/index', function (req, res) {
     console.log("store");
+    console.log(req.body);
     var sql = "SELECT * FROM store";
 
     var count;
     var name = [];
     var cost = [];
+    var id = [];
 
     access.query("SELECT COUNT(*) as count FROM store", function (err, result) {
         if (err) {
@@ -108,12 +110,14 @@ app.get('/store/index', function (req, res) {
         }
 
         for (var i = 0; i < count; i++) {
+            id[i] = result[i].idx;
             name[i] = result[i].name;
             cost[i] = result[i].cost;
         }
 
         res.json({
             'message': message,
+            'id' : id,
             'name': name,
             'cost': cost
         });
